@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+  </head>
+  <body>
+    <div id="totalCash">
+      <h1>總金額(subtotalMethods):{{subtotalMethods(8,9)}}$</h1>
+      <h1>總金額(subtotalMethods):{{subtotalMethods(3,6)}}$</h1>
+      <h1>總金額(subtotalMethods):{{subtotalMethods(4,1)}}$</h1>
+      <!-- methods 裡面的 function 被呼叫時要加 '()'==> subtotalMethods() -->
+      <!-- 所以只有 methods 可以帶入參數 -->
+      <h1>總金額(subtotalComputed):{{subtotalComputed}}$</h1>
+      <h1>總金額(subtotalComputed):{{subtotalComputed}}$</h1>
+      <h1>總金額(subtotalComputed):{{subtotalComputed}}$</h1>
+    </div>
+    <script src="https://unpkg.com/vue@next"></script>
+    <script>
+      const { createApp } = Vue;
+      const vm = createApp({
+        data() {
+          return {
+            price: 200,
+            quantity: 50,
+          };
+        },
+        methods: {
+            subtotalMethods(x, y) {
+                console.log("Methods");
+                return x + y;
+            },
+        },
+        // 在 computed 裡,當 this.XX 有變動時, subtotalComputed() 才會在次執行
+        computed: {
+            subtotalComputed() {
+                console.log("Computed");
+                return this.price * this.quantity;
+            },
+        },
+      }).mount("#totalCash");
+    </script>
+  </body>
+</html>
