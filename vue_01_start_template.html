@@ -1,0 +1,110 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+  </head>
+  <body>
+    <h1>( javaScript )</h1>
+    <h1 id="h1">Q</h1>
+    <input name="message" type="text" value="Hello World" />
+     <!-- teasssst -->
+    <!-- ============================== -->
+    <!-- 分別控制個別的element -->
+    <div id="app">
+      <h1>( Vue3.0 Options-base style )</h1>
+      <h1>{{ message_1 }}</h1>
+      <!-- 取名可以底線,但開頭不能'$'及'_' -->
+      <h1>{{ message2 }}</h1>
+      <h1>{{ message3 }}</h1>
+      <input v-model="message_1" />
+      <input v-model="message2" />
+      <input v-model="message3" />
+    </div>
+    <div id="app1">
+      <h1>( Vue3.0 Composition API Style )</h1>
+      <h1>{{ message4 }}</h1>
+      <h1>{{ message5 }}</h1>
+      <h1>{{ message6 }}</h1>
+      <input v-model="message4" />
+      <input v-model="message5" />
+      <input v-model="message6" />
+    </div>
+    <!-- =========================== -->
+    <div id="app2">
+      <h1>( Vue3.0 Options-base style )</h1>
+      <h1>{{ message }}</h1>
+      <input v-model="message" />
+    </div>
+    <div id="app3">
+      <h1>( Vue3.0 Composition API Style )</h1>
+      <h1>{{ message }}</h1>
+      <input v-model="message" />
+    </div>
+    <!-- ============= template =============== -->
+    <div id="app5"></div>
+    <!-- ============SCRIPT================ -->
+    <!-- ============SCRIPT================ -->
+    <script src="https://unpkg.com/vue@next"></script>
+    <script>
+      const h1 = document.querySelector("#h1"),
+        message = document.querySelector('[name="message"]');
+      h1.innerHTML = message.value;
+      message.addEventListener("input", (el) => {
+        h1.innerHTML = el.target.value;
+      });
+      // ============== Vue3.0  options-base style ==============
+      const vm = Vue.createApp({
+        data() {
+          return {
+            message_1: "Hello Vue1",
+            message2: "Hello Vue2",
+            message3: "Hello Vue3",
+          };
+        },
+      }).mount("#app");
+      // ============== Vue3.0   Composition API Style ==============
+      const { createApp } = Vue;
+      //Vue直接帶入createApp
+      const vm1 = createApp({
+        data() {
+          return {
+            message4: "Hello Vue4",
+            message5: "Hello Vue5",
+            message6: "Hello Vue6",
+          };
+        },
+      }).mount("#app1");
+      // =======兩個實體VUE共用物件 若無就淺層拷貝========
+      const text = { message: "000000" };
+      const vm2 = createApp({
+        data() {
+          return { ...text };
+        },
+      }).mount("#app2");
+
+      const vm3 = createApp({
+        data() {
+          return { ...text };
+        },
+      }).mount("#app3");
+      // ====== template ========
+      const vm4 = createApp({
+        template: 
+        `<h1>(template Test)</h1>
+        <h1>{{text1}}</h1>
+        <h2>{{text2}}</h2>
+        <h3>{{text3}}</h3>`,
+        data(){
+          return {
+            text1:'Hello',
+            text2:'Vue\'s',
+            text3:'World',
+          }
+        }
+      }).mount('#app5');
+    </script>
+  </body>
+</html>

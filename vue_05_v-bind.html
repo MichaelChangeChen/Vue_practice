@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+  </head>
+  <style>
+    .box {
+      margin: 0 auto;
+      width: 50%;
+      height: 70vh;
+      background-color: rgb(0, 0, 0);
+    }
+    #bg-skyblue {
+      background-color: skyblue;
+    }
+    button {
+      width: 200px;
+    }
+  </style>
+  <body>
+    <div id="app">
+      <div class="box" v-bind:id="customId">
+        <!-- v-bind 簡寫方式為去掉 v-bind 直接冒號代替,如:  :disabled  -->
+        <button :disabled="isBtnDisables">click me</button>
+      </div>
+    </div>
+    <script src="https://unpkg.com/vue@next"></script>
+    <script>
+      const { createApp } = Vue;
+      const vm = createApp({
+        data() {
+          return {
+            customId: "bg-skyblue",
+            isBtnDisables: true,
+          };
+        },
+      }).mount("#app");
+    </script>
+  </body>
+</html>
