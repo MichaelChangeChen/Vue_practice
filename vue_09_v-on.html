@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<style>
+    *{
+        padding: 0;
+        margin: 5px;
+    }
+    button,input{
+        width: 50px;
+    }
+    #app{
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+    }
+    h1{
+        font-size: 25px;
+    }
+    h1 ~ h2{
+        font-size: 23px;
+        color: cadetblue;
+    }
+</style>
+
+<body>
+    <div id="app">
+
+        <h1>v-on:click="count++<h2>{{ count1 }}</h2>
+        </h1>
+        <button v-on:click="count1++">+1</button>
+        <h1>Use methods: v-on:click="plus"<h2>{{ count2 }}</h2>
+        </h1>
+        <button @click="plus1">+1</button>
+        <!-- @click="plus" 為 v-on:click的簡寫 -->
+        <h1>Insert and Count: {{ count3 }}</h1>
+        <input  v-model.number="amount">
+        <button v-on:click="plus2(amount,$event)">++1</button>
+        <h1>======== v-on:click(.stop, .prevent, .self .....) ========</h1>
+        <h1>======== @click.stop ========</h1>
+        
+
+
+    </div>
+    <script src="https://unpkg.com/vue@next"></script>
+    <script>
+        const { createApp } = Vue;
+        const vm = createApp({
+            data() {
+                return {
+                    count1: 0,
+                    count2: 0,
+                    amount: 0,
+                    count3: 0,
+                }
+            },
+            methods: {
+                plus1(event) {
+                    console.log(event.target.tagName)
+                    return this.count2++
+                },
+                plus2(amount,event) {
+                    console.log(event.target.tagName)
+                    this.count3 += amount;
+                },
+            },
+            computed: {
+
+            }
+
+        }).mount('#app');
+
+    </script>
+</body>
+
+</html>
