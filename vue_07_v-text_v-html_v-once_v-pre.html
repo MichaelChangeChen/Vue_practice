@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<style>
+    #inputTest {
+        width: 200px;
+        height: 25px;
+        margin-left: 200px;
+    }
+
+    h1~h2 {
+        color: rgb(42, 91, 165);
+    }
+
+    h4 {
+        font-size: 25px;
+        color: brown;
+    }
+
+    h5 {
+        font-size: 18px;
+        color: tomato;
+    }
+</style>
+
+<body>
+    <div id="app">
+        <label for="inputTest">Edit it:</label>
+        <input id="inputTest" type="text" v-model="htmlTag">
+        <h1>============ v-text ============
+            <h5>Use v-text ===> 'Would!!' been cover(disappear) </h5>
+            <h2 v-text="htmlTag">Would!!</h2>
+            <h5>Use { { text } }</h5>
+            <h2>{{ htmlTag }}Would!!</h2>
+        </h1>
+        <h1>============ v-html ============
+            <!-- 差別在於如同js的 innerHTML 與 innerText -->
+            <h5>Use v-html , like .js --> innerHTML</h5>
+            <h2 v-html="htmlTag"></h2>
+            <h5>Use v-text , like .js --> innerText</h5>
+            <h2 v-text="htmlTag"></h2>
+        </h1>
+        <h1>============ v-once ============
+            <h5>Use v-once , only amount once</h5>
+            <h2 v-text="htmlTag" v-once></h2>
+        </h1>
+        <h1>============ v-pre ============
+            <h5>Use v-pre</h5>
+            <h2 v-pre>{{ htmlTag }}</h2>
+            <h5>Without v-pre</h5>
+            <h2>{{ htmlTag }}</h2>
+        </h1>
+
+    </div>
+    <script src="https://unpkg.com/vue@next"></script>
+    <script>
+        const { createApp } = Vue;
+        const vm = createApp({
+            data() {
+                return {
+                    htmlTag: '<h3> Hello World!! </h3>',
+                    text: 'Hello Would~',
+                }
+            },
+            computed: {
+            }
+
+        }).mount('#app');
+
+    </script>
+</body>
+
+</html>

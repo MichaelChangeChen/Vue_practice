@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<style>
+    .error {
+        border: 1px solid tomato;
+        box-shadow: 0 0 15px rgba(255, 0, 0, 0.308);
+        color: tomato;
+    }
+</style>
+
+<body>
+    <div id="app">
+        <h3>v-bind:class => orange</h3>
+        <h3>v-bind:style => red</h3>
+        <input 
+            type="text" 
+            v-model.tirm="message" 
+            v-bind:class="{ 'error':message.length > 5 }" 
+            :style="msgStyle">
+    </div>
+    <script src="https://unpkg.com/vue@next"></script>
+    <script>
+        const { createApp } = Vue;
+        const vm = createApp({
+            data() {
+                return {
+                    message: '',
+                }
+            },
+            computed: {
+                isVaild: function () {
+                    return this.message.length > 10
+                },
+                msgStyle: function () {
+                    return {
+                        'border': this.isVaild ? 'red solid 2px' : '',
+                        'color': this.isVaild ? 'red' : '',
+                        'box-shadow': this.isVaild ? ' 0  0  15px red' : ''
+                    }
+                },
+            }
+
+        }).mount('#app');
+
+    </script>
+</body>
+
+</html>

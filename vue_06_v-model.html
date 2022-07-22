@@ -1,0 +1,129 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<style>
+    h1~h2 {
+        color: rgb(42, 91, 165);
+    }
+
+    h4 {
+        font-size: 25px;
+        color: brown;
+    }
+
+    h5 {
+        font-size: 18px;
+        color: tomato;
+    }
+</style>
+
+<body>
+    <div id="app">
+        <h4>================ Input ================</h4>
+        <h1>Input Message is:
+            <h2>{{ messageInput }}</h2>
+        </h1>
+        <input v-model="messageInput" placeholder="edit me">
+        <h5>------- v-model.lazy -------</h5>
+        <!-- 改為監聽 change 事件，離開輸入框焦點時才更新 data 內容 -->
+        <h1>Input Message is:
+            <h6>when leave the input Data() will change</h6>
+            <h2>{{ messageInput }}</h2>
+        </h1>
+        <input v-model.lazy="messageInput" placeholder="edit me">
+        <h5>------- v-model.number -------</h5>
+        <input v-model.number="num1"> + <input v-model.number="num2"> = {{ sum1 }}
+        <h5>------- v-model with out '.number' -------</h5>
+        <input v-model="num3"> + <input v-model="num4"> = {{ sum2 }}
+        <h5>------- v-model.trim -------</h5>
+        <h1>Message is:
+            <h2>{{ messageInputVrim }}</h2>
+        </h1>
+        <h6>delete front and end space</h6>
+        <input v-model.trim="messageInputVrim">
+        <h4>================ Textarea ================</h4>
+        <h1>Textarea Multiline message is:
+            <h2>{{ messageTextarea }}</h2>
+        </h1>
+        <h3>Have v-model, this will change</h3>
+        <textarea v-model="messageTextarea" placeholder="add Multiline Message"></textarea>
+        <h3>Miss the v-model, this won't change</h3>
+        <textarea placeholder="add Multiline Message"></textarea>
+        <h4>================ Radio ================</h4>
+        <div>
+            <h1>This is your choose:
+                <h2>{{ picked }}</h2>
+            </h1>
+            <input type="radio" id="one" value="1" v-model="picked">
+            <label for="one">One</label>
+            <input type="radio" id="two" value="2" v-model="picked">
+            <label for="two">Two</label>
+        </div>
+        <h4>================ Checkbox ================</h4>
+        <!-- 唯一的差別只在 data 內的狀態必須是「陣列」 -->
+        <h1>This is your choose:
+            <h2>{{ checkbox }}</h2>
+        </h1>
+        <input type="checkbox" id="cat" value="Cat" v-model="checkbox">
+        <label for="cat">Cat</label>
+        <input type="checkbox" id="dog" value="Dog" v-model="checkbox">
+        <label for="dog">Dog</label>
+        <input type="checkbox" id="mouse" value="Mouse" v-model="checkbox">
+        <label for="mouse">Mouse</label>
+        <input type="checkbox" id="rabbit" value="Rabbit" v-model="checkbox">
+        <label for="rabbit">Rabbit</label>
+        <input type="checkbox" id="mounkey" value="Mounkey" v-model="checkbox">
+        <label for="mounkey">Mounkey</label>
+        <h3>================ Option ================</h3>
+        <h1>This is your choose:
+            <h2>{{ selectOption || 'Please select~' }}</h2>
+        </h1>
+        <!-- 使用了 v-model 指令的表單元素會自動忽略原有的 value 、 checked 與 selected 屬性，實際的值將以 data 內的狀態為主~ -->
+        <select v-model="selectOption">
+            <option disabled value=""> Please select~ </option>
+            <option> Michael </option>
+            <option> Amber </option>
+            <option> Zoey </option>
+            <option> Baddy </option>
+            <option> Cristin </option>
+        </select>
+    </div>
+    <script src="https://unpkg.com/vue@next"></script>
+    <script>
+        const { createApp } = Vue;
+        const vm = createApp({
+            data() {
+                return {
+                    messageInput: 'Hello',
+                    num1: 0,
+                    num2: 0,
+                    num3: 0,
+                    num4: 0,
+                    messageInputVrim: 'Hi',
+                    messageTextarea: 'Hello',
+                    picked: 1,
+                    checkbox: [],
+                    selectOption: 'Please select~',
+                }
+            },
+            computed: {
+                sum1() {
+                    return this.num1 + this.num2;
+                },
+                sum2() {
+                    return this.num3 + this.num4;
+                },
+            }
+
+        }).mount('#app');
+
+    </script>
+</body>
+
+</html>
