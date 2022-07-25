@@ -1,0 +1,33 @@
+★★載入專案★★：
+1.git clone <專案網址>
+2.建立branch分支：
+git branch <Name>    //或輸入: git checkout -b <Name> #建立且切換分支
+3.切換到分支：
+git checkout <Name>
+4.首次push需對應到上游分支(master): 
+git push --set-upstream origin <Name>
+-----------------------------------------------
+★★Branch命名格式★★：
+[author]_[date]_[time]_[description]
+e.g.
+MC_20190201_1500_refactor_deviceInfoHandler
+-----------------------------------------------
+★★上傳流程★★：
+1.git add <files>
+2.git commit -m   <格式為> "feat(asidis-web): Modify WH validation & Create WH env."
+<-- 
+feat: A new feature.
+fix: A bug fix.
+style: Changes that do not affect the meaning of the code(white-space, formatting, missing semi-colons, etc).
+refactor: A code change that neither fixes a bug nor adds a feature.
+test: Adding missing tests or correcting existing tests.
+chore: Other changes not modifying src or test files.
+perf: A code change that improves performance.
+-->
+3.git push
+remote: To create a merge request for michael, visit:會得到一個網址（click it）
+4.下方
+Assignee(主要的codeReviewer)
+Reviewer(次codeReviewer)
+Merge options 通常都打勾
+第一個是merge後刪除 branch 第二是合併commits當接受後

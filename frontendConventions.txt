@@ -1,0 +1,48 @@
+★★檔案放置及命名★★：
+1.js取名開頭小寫,vue取名開頭大寫
+2.檔案避免重複命名
+3.盡量避免在main.js裡編寫function
+4.component內的vue檔案必須在子資料夾內
+5. import的檔源為js時：
+命名第一個字是小寫
+ex: import mediaProvider from 'media.js' 
+是mediaProvider 不是MediaProvider
+6. import的檔源為Vue時：
+命名第一個字是大寫
+ex: import MediaProvider from 'media.vue' 
+是MediaProvider 不是mediaProvider
+----------------------------------------------
+★★規則★★：
+1.Tab鍵為4格空白鍵
+2.段落後方不得有空白鍵
+3.路徑'../' 改為以 '@/'代替
+4.標籤格式都用雙引號
+5.花誇號裡頭尾增加1空格 {{ hello }}
+6.標籤的屬性(properties)超過兩個以上每個都須換行
+	屬性(properties)如下：
+	01. v* at first,	e.g. v-if / v-for / v-show / v.b.modal ...
+	02. : at first,	e.g. :key / :title ...
+	03. @ at first,	e.g. @click ...
+	04. others,		e.g. class or not vue properties ...
+7. Language File 內中文與英文的key名稱須相同
+8. Key在命名時需具體,亦可是動詞的形容,如（"FileMaxLimitReach":"...",）
+9. Language File詳細講解須參照：
+	https://gitlab.aisd.is.acbel.com/root/vuejs/-/wikis/Code-convention-Frontend
+10.js與Vue凡遇到要使用空值時,該使用 null / [] 空陣列,而不是空字串 ''
+11. CSS檔案須依照component頁面排放,同資料夾名稱及同檔案名稱（注意大小寫）
+12.在Vue中的tempalte標籤裡,第一個DOM須給予calssName,密明方式需跟檔案名稱相同
+	如：vue file name is MeetingRoomBooking.vue
+	<template>
+	<b-container class="meeting-room-booking">
+		<div>
+13. template專屬標籤中不得用in-line style
+14. className命名用烤肉串命名法 如:（ class="i-am-hungry-now" ）
+15.不的使用 !important
+----------------------------------------------
+★★關於換行★★:
+1.在function有多個參數時,每一個後面換行
+2.function包function時換行
+3.長的運算行裡遇到 + 換行
+4.參數名稱過長時換行
+5.function名稱過長且有參數時,參數前換行且一個Tab鍵
+6. if條件試過長時,判斷前換行且兩個Tab
