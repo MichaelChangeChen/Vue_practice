@@ -1,0 +1,81 @@
+<b-card header-tag="header" footer-tag="footer">
+    <!-- 會產生一個<header class="card-header">標籤來包住下面的h5 -->
+    <template #header>
+        <h5 class="modal-title">{{ $t('PageTitle.SuggestionBox') }}</h5>
+    </template>
+    <!-- 並且產生<div class="card-body">標籤來包住 <template #header> 至 <template #footer> 的內容 -->
+    <div class="space-10"></div>
+
+    <b-card-text>
+        <label class="formLabel"><span class="text-danger">*</span>{{ $t('Tab.Input.EmployeeId') }}</label>
+        <b-card-text>
+            <label class="formLabel"><span class="text-danger">*</span>{{ $t('Tab.Input.Title') }}</label>
+            <!-- .trim 前後空白去除  -->
+            <!-- .immediate 綁定 在畫面渲染時就先顯示 -->
+            <b-form-input v-model.trim="title" v-validate.immediate="'required|max:100'" id="title" name="title">
+            </b-form-input>
+            <!-- errors是VeeValidate內存位置(errorBagName),把input的name="title"存置errors裡,在用errors.has('title')尋找及errors.first('title')顯示 -->
+            <span v-if="errors.has('title')" class="text-danger">{{ errors.first('title') }}</span>
+
+            <b-form-select v-model="feedbackCategoryId">
+                <!-- feedbackCategoryList是一個陣列,來自於js檔的.post('/suggestionList')API -->
+                <option v-for="feedback in feedbackCategoryList" :value="feedback.id" :key="feedback.id"
+                    name="feedback">
+                    {{ $t('Enum.Feedback.'+feedback.name) }}
+                </option>
+            </b-form-select>
+
+            <!-- component -->
+            <UploadFile @sendFileInfo="getAttachement" :file-upload-condition="fileUploadCondition">
+            </UploadFile>
+            <!-- component -->
+
+            <template #footer>
+                <div class="w-100 text-right btn-tools">
+                    <!-- v-b-modal.confirmCancel 對應到b-model -->
+                    <b-button v-b-modal.confirmCancel variant="secondary" size="sm">
+                        <font-awesome-icon icon="times" />
+                        <span>{{ $t('Button.Control.Cancel') }}</span>
+                    </b-button>
+                </div>
+
+                <!-- Confirm cancel -->
+                <b-modal :title="$t(`Button.Control.Confirm`)" id="confirmCancel" ref="confirmCancel" centered>
+                    <div class="common-modal-description">{{ $t('Message.Confirm.AreYouSureToDiscardIt') }}</div>
+                    <template #modal-footer>
+                        <div class="w-100 text-right btn-tools">
+                            <b-button @click="$closeModel('confirmCancel')" variant="secondary" size="sm">
+                                <font-awesome-icon icon="long-arrow-alt-left" />
+                                <span>{{ $t('Button.Control.Cancel') }}</span>
+                            </b-button>
+                            <b-button @click="$router.go(-1)" variant="danger" size="sm">
+                                <font-awesome-icon icon="trash" />
+                                <span>{{ $t('Button.Control.Reset') }}</span>
+                            </b-button>
+                        </div>
+                    </template>
+                </b-modal>
+
+
+                SuggestionBox.vue
+
+                專案中v-validate所對應檔案
+                https://vee-validate.logaretm.com/v2/configuration.html
+
+                vuejs/asidis/src/locales/validation_zh.js
+                vuejs/asidis/src/main.js
+
+                Q1: {{ $t('PageTitle.SuggestionBox') }}
+                目前了解：透過 i18n套件 $t 的方法抓取zh_TW.json格式
+
+                Q2: ="'numeric|length:6'"
+                目前了解：透過 vee-validate套件 ,可透過validation_zh.js了解內容
+
+                Q3: onkeypress="return event.charCode >= 48 && event.charCode <= 57" 目前了解：限制數字鍵(48~57) charCode是返回事件
+                    KeyboardEvent期間按下的字符鍵的 Unicode 值(唯獨)。 ex: Key pressed: a , charCode: 97 ; Key pressed: A , charCode:
+                    65 Q4: <span v-if="errors.has('extension')" class="text-danger">{{ errors.first('extension')
+                    }}</span>
+                    簡化如下：
+                    <input v-validate="'required|email'" type="text" name="email">
+                    <span v-show="errors.has('email')">{{ errors.first('email') }}</span>
+                    <span>"errors.has('email')" 的 ('email') 對應 <input>name="email"
